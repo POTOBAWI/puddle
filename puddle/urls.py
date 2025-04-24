@@ -20,6 +20,16 @@ from django.conf.urls.static import static
 from django.urls import path,include
 
 
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+
+
+
+def custom_logout(request):
+    logout(request)
+    return redirect('/')
+
+
 urlpatterns = [
     path('', include('core.urls'),name='core'),
     path('items/',include("item.urls")),
@@ -27,4 +37,5 @@ urlpatterns = [
 
     path('dashboard/',include('dashboard.urls')),
     path('admin/', admin.site.urls),
+    path('logout/',custom_logout,name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

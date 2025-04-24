@@ -22,8 +22,8 @@ def new_conversation(request, item_pk):
         if form.is_valid():
             # Crée une nouvelle conversation
             conversation = Conversation.objects.create(item=item)
-            conversation.members.add(request.user)
-            conversation.members.add(item.created_by)
+            conversation.members.add(request.user) #ajout du createur de la conversation
+            conversation.members.add(item.created_by) # ajout du proprietaire du produit
             conversation.save()
 
             # Crée un message pour la conversation
