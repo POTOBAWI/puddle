@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5q)#-9v7bg3trz4oml^&poqbtmwx35k#rsl^_n%inqz*7a4ay!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['.onrender.com','127.0.0.1']
+ALLOWED_HOSTS = ['.onrender.com']
 LOGIN_URL="/login/"
 LOGIN_REDIRECT_URL="/"
 LOGOUT_REDIRECT_URL="/"
