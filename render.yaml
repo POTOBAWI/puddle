@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: marekt_place_django
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn market_place_django.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: market_place_django.settings
+      - key: PYTHON_VERSION
+        value: 3.11
