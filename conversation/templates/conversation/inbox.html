@@ -1,27 +1,33 @@
 {% extends 'core/base.html' %}
+
 {% block title %}Inbox{% endblock title %}
+
 {% block content %}
-<h1 class="mb-6 text-3xl ">Inbox</h1>
+<h1 class="mb-6 text-3xl text-center">Inbox</h1>
+
 <div class="space-y-6">
     {% for conversation in conversations %}
     <a href="{% url 'conversation:detail' conversation.id %}" class="block">
-        <div class="p-6 flex bg-gray-100 rounded-xl ">
-            <div class="pr-6">
-                <img src="{{ conversation.item.image.url }}" alt="" class="w-20 rounded-xl">
+        <div class="p-4 md:p-6 flex bg-gray-100 rounded-xl hover:bg-gray-200 transition max-w-3xl mx-auto">
+            <div class="pr-4 md:pr-6">
+                <img src="{{ conversation.item.image.url }}" alt="Item image" class="w-16 md:w-20 rounded-xl object-cover">
             </div>
 
-            <div>
-                {% for member in converstation.members.all %}
+            <div class="flex-1">
+                {% for member in conversation.members.all %}
                     {% if member != request.user %}
-                    <p class="mb-6 "><strong>{{ member.username}}</strong> {{ conversation.modified_at }}</p>
-                    <p>{{ conversation.item.name }}</p>
+                        <p class="mb-2 text-blue-700 font-semibold text-lg">
+                            {{ member.username }}
+                            <span class="text-gray-500 text-sm">· {{ conversation.modified_at|date:"d/m/Y H:i" }}</span>
+                        </p>
+                        <p class="text-gray-700">{{ conversation.item.name }}</p>
                     {% endif %}
                 {% endfor %}
-
-
             </div>
         </div>
     </a>
+    {% empty %}
+    <p class="text-center text-gray-500">Aucune conversation pour l'instant.</p>
     {% endfor %}
 </div>
 {% endblock content %}
