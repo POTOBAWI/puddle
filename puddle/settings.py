@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5q)#-9v7bg3trz4oml^&poqbtmwx35k#rsl^_n%inqz*7a4ay!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+#ALLOWED_HOSTS = ['.onrender.com']
+
 LOGIN_URL="/login/"
 LOGIN_REDIRECT_URL="/"
 LOGOUT_REDIRECT_URL="/"
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'cloudinary_storage',
     'core',
     'item',
     'dashboard',
@@ -129,8 +132,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"] 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+#POUR GARDER MAGES DANS CLOUDINARY
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+#LES CLES DE CLOUDINARY
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dgdk0lrcj',
+    'API_KEY': '911217672262747',
+    'API_SECRET': 'QkOu_pncq6pTOCsDkaCc0QUL3iM',
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
