@@ -35,7 +35,7 @@ urlpatterns = [
     path('', include('core.urls'),name='core'),
     path('items/',include("item.urls")),
     path('inbox/',include("conversation.urls")),
-    path('paiement/', include('paiement.urls')),
+  
 
 
     path('dashboard/',include('dashboard.urls')),
