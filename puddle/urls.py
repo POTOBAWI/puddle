@@ -31,11 +31,14 @@ def custom_logout(request):
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', include('core.urls'),name='core'),
     path('items/',include("item.urls")),
     path('inbox/',include("conversation.urls")),
+    path('paiement/', include('paiement.urls')),
+
 
     path('dashboard/',include('dashboard.urls')),
-    path('admin/', admin.site.urls),
+    
     path('logout/',custom_logout,name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
