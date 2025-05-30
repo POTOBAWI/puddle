@@ -3,7 +3,32 @@
 {% block content %}
    
 <div class="mt-6 py-12 px-6 bg-gray-100 rounded-xl">
+    {% if recommendations %}
+        <h2 class="text-center text-gray-500 mb-6">Here are some items we think you might like!</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for recommendation in recommendations %}
+                <div>
+                    <a href="{% url 'item:detail' recommendation.item.id %}">
+                        <div>
+                            <img src="{{ recommendation.image.url }}" alt="{{ recommendation.name }}" class="rounded-t-xl w-full h-48 object-cover">
+                        </div>
+                        <div class="p-6 bg-white rounded-b-xl">
+                            <h2 class="text-xl font-semibold">{{ recommendation.name }}</h2>
+                            <p class="text-gray-500 mt-2">Prix : {{ recommendation.price }} €</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    
+        <p class="text-center text-gray-500 text-2xl">No recommendations available at the moment.</p>
+    {% endif %}
+</div>
+
+
     <h2 class="mb-12 text-2xl text-center">Newest items</h2>
+
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {% for item in items %}

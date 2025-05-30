@@ -24,5 +24,12 @@ class Item(models.Model):
         ordering=('-created_at',)
     def __str__(self):
         return self.name
+    
+
+
+class ItemView(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey('Item', on_delete=models.CASCADE)
+    viewed_at = models.DateTimeField(auto_now_add=True)
 
  

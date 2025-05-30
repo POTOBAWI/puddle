@@ -2,8 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Conversation, Item, ConversationMessage
 from .forms import ConversationMessageForm
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
-# Création d'une nouvelle conversation
+from django.db.models import Q, Count
+
+
+
+
 @login_required
 def new_conversation(request, item_pk):
     item = get_object_or_404(Item, pk=item_pk)
@@ -44,17 +49,35 @@ def new_conversation(request, item_pk):
 # Boîte de réception des conversations
 @login_required
 def inbox(request):
-    conversations = Conversation.objects.filter(members__in=[request.user.id])
+    conversations = Conversation.objects.filter(members=request.user).annotate(
+        unread_count=Count(
+            'messages',
+            filter=Q(messages__is_read=False) & ~Q(messages__created_by=request.user)
+        )
+    ).order_by('-modified_at')
+
+    for convo in conversations:
+        last_message = convo.messages.order_by('-created_at').first()
+        convo.last_message = last_message.content if last_message else ""
+
     return render(request, 'conversation/inbox.html', {
-        'conversations': conversations
+        'conversations': conversations,
+        'last_message': {convo.id: convo.last_message for convo in conversations}
     })
 
-@login_required
 
+@login_required
 def detail(request, pk):
-    conversation = Conversation.objects.filter(members__in=[request.user.id]).get(pk=pk)
+    conversation = get_object_or_404(Conversation, pk=pk)
+
     if request.user not in conversation.members.all():
         return redirect('conversation:inbox')
+
+    # Marquer comme lus les messages de l'autre utilisateur
+    conversation.messages.filter(
+        ~Q(created_by=request.user),
+        is_read=False
+    ).update(is_read=True)
 
     if request.method == 'POST':
         form = ConversationMessageForm(request.POST)
@@ -72,3 +95,10 @@ def detail(request, pk):
         'conversation': conversation,
         'form': form
     })
+
+
+
+
+
+
+
