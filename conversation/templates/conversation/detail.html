@@ -3,17 +3,43 @@
 {% block title %}Conversation{% endblock title %}
 
 {% block content %}
+
+{% load custom_filters %}
 <h1 class="mb-6 text-3xl text-center">Conversation</h1>
 
 <div class="space-y-6">
     {% for message in conversation.messages.all %}
-        <div class="p-4 md:p-6 flex rounded-xl max-w-2xl {% if message.created_by == request.user %}bg-blue-100 ml-auto{% else %}bg-gray-100{% endif %}">
+        <div class="p-4 md:p-6 flex rounded-xl max-w-2xl 
+            {% if message.created_by == request.user %}
+                bg-blue-100 ml-auto
+            {% else %}
+                bg-gray-100
+            {% endif %}
+        ">
             <div>
                 <p class="mb-2 font-bold text-blue-700 text-sm">
-                    <strong>{% if message.created_by == request.user %}Vous{% else %}{{ message.created_by.username }}{% endif %}</strong> 
+                    <strong>
+                        {% if message.created_by == request.user %}
+                            Vous
+                        {% else %}
+                            {{ message.created_by.username }}
+                        {% endif %}
+                    </strong>
                     <span class="text-gray-500">@ {{ message.created_at|date:"d/m/Y H:i" }}</span>
                 </p>
-                <p class="text-gray-700">{{ message.content }}</p>
+
+                <p class="text-gray-700 whitespace-pre-wrap">{{ message.content }}</p>
+
+                {% if message.file %}
+                    <div class="mt-2">
+                        {% if message.file.url|lower|endswith:".jpg" or message.file.url|lower|endswith:".jpeg" or message.file.url|lower|endswith:".png" or message.file.url|lower|endswith:".gif" %}
+                            <img src="{{ message.file.url }}" alt="Image" class="max-w-xs rounded mt-2">
+                        {% endif %}
+                        <a href="{{ message.file.url }}" target="_blank" class="text-blue-500 underline block mt-2">
+                            📎 Télécharger le fichier
+                        </a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% empty %}
@@ -21,11 +47,16 @@
     {% endfor %}
 </div>
 
-<form action="." method="post" class="mt-8 max-w-2xl mx-auto space-y-4">
+<!-- Formulaire d'envoi de message -->
+<form action="." method="post" enctype="multipart/form-data" class="mt-8 max-w-2xl mx-auto space-y-4">
     {% csrf_token %}
-    
+
     <div>
-        {{ form.content}}
+        {{ form.content }}
+    </div>
+
+    <div>
+        {{ form.file }}
     </div>
 
     <button class="w-full py-4 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white">Envoyer</button>

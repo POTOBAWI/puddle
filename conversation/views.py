@@ -23,7 +23,7 @@ def new_conversation(request, item_pk):
         return redirect('conversation:detail', pk=conversations.first().id)
 
     if request.method == 'POST':
-        form = ConversationMessageForm(request.POST)
+        form = ConversationMessageForm(request.POST, request.FILES)
         if form.is_valid():
             # Crée une nouvelle conversation
             conversation = Conversation.objects.create(item=item)
