@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block title %}Commande{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold text-teal-600 mb-6">Résumé de la commande</h1>
+
+<div class="bg-white p-4 rounded-xl shadow-md">
+    {% for item in cart_items %}
+        <div class="flex justify-between border-b py-2">
+            <div>
+                <p class="font-semibold">{{ item.item.name }}</p>
+                <p class="text-gray-500 text-sm">Quantité : {{ item.quantity }}</p>
+            </div>
+            <div>
+                <p class="text-right">{{ item.item.price }} FCFA</p>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center text-gray-500">Votre panier est vide.</p>
+    {% endfor %}
+
+    <div class="flex justify-between font-bold text-lg mt-4">
+        <p>Total :</p>
+        <p class="text-2xl font-bold text-teal-600 mb-6">{{ total }} FCFA</p>
+    </div>
+
+    <form method="POST" action="#" class="mt-6">
+        {% csrf_token %}
+        <!-- Plus tard : infos de livraison ici -->
+        <button class="w-full bg-teal-500 text-white font-semibold py-2 rounded-xl hover:bg-teal-600">
+            Confirmer la commande
+        </button>
+    </form>
+</div>
+{% endblock %}

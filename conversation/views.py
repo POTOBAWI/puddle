@@ -78,6 +78,7 @@ def detail(request, pk):
         ~Q(created_by=request.user),
         is_read=False
     ).update(is_read=True)
+    conversation.unread_count=0
 
     if request.method == 'POST':
         form = ConversationMessageForm(request.POST)
