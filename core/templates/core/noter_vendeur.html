@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Noter le vendeur : {{ vendeur.username }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Étoiles -->
+        <div class="mb-3">
+            <label for="note" class="form-label">Votre note :</label>
+            <select name="note" id="note" class="form-select" required>
+                <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                <option value="4">⭐⭐⭐⭐ - Très bien</option>
+                <option value="3">⭐⭐⭐ - Moyen</option>
+                <option value="2">⭐⭐ - Mauvais</option>
+                <option value="1">⭐ - Très mauvais</option>
+            </select>
+        </div>
+
+        <!-- Commentaire -->
+        <div class="mb-3">
+            <label for="commentaire" class="form-label">Votre avis :</label>
+            <textarea name="commentaire" id="commentaire" class="form-control" rows="4" placeholder="Écrivez quelques mots sur votre expérience..."></textarea>
+        </div>
+
+        <button type="submit" class="bg-blue-100">Envoyer la note</button>
+    </form>
+</div>
+{% endblock %}

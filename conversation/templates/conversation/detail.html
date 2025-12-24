@@ -9,6 +9,7 @@
 
 <div class="space-y-6">
     {% for message in conversation.messages.all %}
+    
         <div class="p-4 md:p-6 flex rounded-xl max-w-2xl 
             {% if message.created_by == request.user %}
                 bg-blue-100 ml-auto

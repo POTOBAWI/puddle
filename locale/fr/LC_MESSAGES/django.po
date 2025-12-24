@@ -1,0 +1,147 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-28 16:00+0000\n"
+"PO-Revision-Date: 2025-08-28 16:00+0000\n"
+"Last-Translator: YOUR NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\item\models.py:6
+msgid "Nom de la catégorie"
+msgstr "Nom de la catégorie"
+
+#: .\item\models.py:10 .\item\models.py:17
+msgid "Catégorie"
+msgstr "Catégorie"
+
+#: .\item\models.py:11
+msgid "Catégories"
+msgstr "Catégories"
+
+#: .\item\models.py:18
+msgid "Nom"
+msgstr "Nom"
+
+#: .\item\models.py:19
+msgid "Description"
+msgstr "Description"
+
+#: .\item\models.py:20
+msgid "Prix"
+msgstr "Prix"
+
+#: .\item\models.py:21
+msgid "Image"
+msgstr "Image"
+
+#: .\item\models.py:22
+msgid "Vendu"
+msgstr "Vendu"
+
+#: .\item\models.py:23 .\item\models.py:35
+msgid "Utilisateur"
+msgstr "Utilisateur"
+
+#: .\item\models.py:24
+msgid "Créé le"
+msgstr "Créé le"
+
+#: .\item\models.py:28 .\item\models.py:36
+msgid "Article"
+msgstr "Article"
+
+#: .\item\models.py:29
+msgid "Articles"
+msgstr "Articles"
+
+#: .\item\models.py:37
+msgid "Vu le"
+msgstr "Vu le"
+
+#: .\puddle\settings.py:168
+msgid "Français"
+msgstr "Français"
+
+#: .\puddle\settings.py:169
+msgid "Anglais"
+msgstr "Anglais"
+
+#: .\puddle\settings.py:170
+msgid "Espagnol"
+msgstr "Espagnol"
+
+#: .\puddle\settings.py:171
+msgid "Allemand"
+msgstr "Allemand"
+
+#:.\item\templates\item\detail.html:18
+msgid "Noter ce vendeur"
+msgstr "Noter ce vendeur"
+
+#: templates/base.html:…
+msgid "Connexion"
+msgstr "Connexion"
+
+msgid "Déconnexion"
+msgstr "Déconnexion"
+
+msgid "S'inscrire"
+msgstr "S'inscrire"
+
+msgid "Nouveau produit"
+msgstr "Nouveau produit"
+
+msgid "Rechercher"
+msgstr "Rechercher"
+
+msgid "Changer de langue"
+msgstr "Changer de langue"
+
+msgid "Okaz"
+msgstr "Okaz"
+
+msgid "Inbox"
+msgstr "Inbox"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Lieu:"
+msgstr "Lieu:"
+
+msgid "Note moyenne du vendeur:"
+msgstr "Note moyenne du vendeur:"
+
+msgid "Modifier:"
+msgstr "Modifier:"
+
+msgid "Supprimer:"
+msgstr "Supprimer:"
+
+msgid "Ceci est votre article:"
+msgstr "Ceci est votre article:"
+
+msgid "Articles similaires:"
+msgstr "Articles similaires:"
+
+msgid "Contacter le vendeur:"
+msgstr "Contacter le vendeur:"
+
+msgid "Ajouter au panier:"
+msgstr "Ajouter au panier:"
+
+msgid "Vendeur:"
+msgstr "Vendeur:"
+
+

@@ -1,0 +1,13 @@
+<form method="post">
+  {% csrf_token %}
+  <textarea name="texte" rows="6" cols="60"></textarea>
+  <button type="submit">traduire</button>
+</form>
+
+{% if traduction %}
+<h3>Résumé :</h3>
+<p>{{ traduction }}</p>
+{% else %}
+<p> pas de traduction </p>
+
+{% endif %}

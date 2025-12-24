@@ -99,7 +99,69 @@ def detail(request, pk):
 
 
 
+from django.shortcuts import render
+from .utils import TraducteurAgent
 
+def traduire_vue(request):
+    print("✅ Vue appelée")
+    traduction = ""
+    texte_source = ""
+
+    if request.method == "POST":
+        print("📨 POST reçu")
+        texte_source = request.POST.get("texte", "")
+        print(f"✏️ Texte soumis : {texte_source}")
+
+        if texte_source:
+            try:
+                print("🚀 Chargement de l'agent...")
+                agent = TraducteurAgent()
+                print("🤖 Traduction en cours...")
+                traduction = agent.traduire(texte_source)
+                print("✅ Traduction terminée")
+                traduction = traduction.strip()
+            except Exception as e:
+                print(f"❌ Erreur : {e}")
+                traduction = "Erreur lors de la traduction."
+
+    return render(request, "conversation/traduction.html", {
+        "texte": texte_source,
+        "traduction": traduction
+    })
+
+from transformers import pipeline
+
+# Choisis un modèle léger
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+
+def summarize_text(text):
+    # Limite de tokens pour rester léger
+    summary = summarizer(text, max_length=255, min_length=40, do_sample=False)
+    return summary[0]['summary_text']
+
+
+def summarize_view(request):
+    summary = ""
+    if request.method == "POST":
+        text = request.POST.get("text")
+        if text:
+            summary = summarize_text(text)
+    else:
+        text = ""
+    return render(request, "conversation/summarize.html", {"summary": summary})
+
+
+
+translator = pipeline("translation", model="Helsinki-NLP/opus-mt-fr-en")
+
+def traducteur_vue(request):
+    traduction = ""
+    if request.method == "POST":
+        texte = request.POST.get("texte", "")
+        if texte:
+            resultat = translator(texte, max_length=100)
+            traduction = resultat[0]['translation_text']
+    return render(request, "conversation/traduction.html", {"traduction": traduction})
 
 
 

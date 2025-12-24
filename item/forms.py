@@ -3,10 +3,11 @@ from django import forms
 from .models import Item
 
 INPUT_CLASSES='w-full py-4 px-6 rounded-xl border-2 '
+
 class EditItemForm(forms.ModelForm):
     class Meta:
         model=Item
-        fields=('name','description','price','image',"is_sold")
+        fields=('name','description','price','image',"is_sold","location")
         widgets={
             
 
@@ -20,6 +21,9 @@ class EditItemForm(forms.ModelForm):
                 'class':INPUT_CLASSES
             }),
             'image':forms.FileInput(attrs={
+                'class':INPUT_CLASSES
+            }),
+            'location':forms.TextInput(attrs={
                 'class':INPUT_CLASSES
             }),
 
@@ -44,6 +48,9 @@ class NewItemForm(forms.ModelForm):
                 'class':INPUT_CLASSES
             }),
             'image':forms.FileInput(attrs={
+                'class':INPUT_CLASSES
+            }),
+            'location':forms.TextInput(attrs={
                 'class':INPUT_CLASSES
             }),
 

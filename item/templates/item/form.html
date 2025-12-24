@@ -3,6 +3,13 @@
 
 {% block content %}
 <h1 class="mb-6 text-3xl text-center">{{ title }}</h1>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 <form action="." method="post" enctype="multipart/form-data" class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md">
     {% csrf_token %}

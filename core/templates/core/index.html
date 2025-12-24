@@ -1,10 +1,13 @@
 {% extends "core/base.html" %}
-{% block title %}Home{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
 {% block content %}
-   
-<div class="mt-6 py-12 px-6 bg-gray-100 rounded-xl">
+
+<div class="bg-gray-500 rounded-xl shadow-lg p-6">
+    <div class="mt-6 py-12 px-6 bg-gray-100 rounded-xl shadow-lg">
     {% if recommendations %}
-        <h2 class="text-center text-gray-500 mb-6">Here are some items we think you might like!</h2>
+        <h2 class="text-center text-gray-500 mb-6">{% trans "Here are some items we think you might like!" %}</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {% for recommendation in recommendations %}
                 <div>
@@ -14,41 +17,38 @@
                         </div>
                         <div class="p-6 bg-white rounded-b-xl">
                             <h2 class="text-xl font-semibold">{{ recommendation.name }}</h2>
-                            <p class="text-gray-500 mt-2">Prix : {{ recommendation.price }} €</p>
+                            <p class="text-gray-500 mt-2">{% trans "Price" %} : {{ recommendation.price }} €</p>
                         </div>
                     </a>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-    
-        <p class="text-center text-gray-500 text-2xl">No recommendations available at the moment.</p>
+        <p class="text-center text-gray-500 text-2xl">{% trans "No recommendations available at the moment." %}</p>
     {% endif %}
 </div>
 
+<h2 class="mb-12 text-2xl text-center">{% trans "Newest items" %}</h2>
 
-    <h2 class="mb-12 text-2xl text-center">Newest items</h2>
-
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {% for item in items %}
-            <div>
-                <a href="{% url 'item:detail' item.id %}">
-                    <div>
-                        <img src="{{ item.image.url }}" alt="image" class="rounded-t-xl w-full h-48 object-cover">
-                    </div>
-                    <div class="p-6 bg-white rounded-b-xl">
-                        <h2 class="text-xl font-semibold">{{ item.name }}</h2>
-                        <p class="text-gray-500 mt-2">Prix : {{ item.price }} €</p>
-                    </div>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-gray-500">
+    {% for item in items %}
+        <div class="bg-white shadow-lg">
+            <a href="{% url 'item:detail' item.id %}">
+                <div>
+                    <img src="{{ item.image.url }}" alt="image" class="rounded-t-xl w-full h-48 object-cover">
+                </div>
+                <div class="p-6 bg-white rounded-b-xl">
+                    <h2 class="text-xl font-semibold">{{ item.name }}</h2>
+                    <p>{% trans "Location" %}: <span class="text-gray-500">{{ item.location }}</span></p>
+                    <p class="text-gray-500 mt-2">{% trans "Price" %} : {{ item.price }} €</p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
 </div>
 
 <div class="mt-6 py-12 px-6 bg-gray-100 rounded-xl">
-    <h2 class="mb-12 text-2xl text-center">Categories</h2>
+    <h2 class="mb-12 text-2xl text-center">{% trans "Categories" %}</h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-12">
         {% for category in categories %}
@@ -56,7 +56,9 @@
                 <a href="#">
                     <div class="p-6 bg-white rounded-b-xl">
                         <h2 class="text-xl font-semibold">{{ category.name }}</h2>
-                        <p class="text-gray-500 mt-2">{{ category.items.count }} items</p>
+                        <p class="text-gray-500 mt-2">
+                            {{ category.items.count }} {% trans "items" %}
+                        </p>
                     </div>
                 </a>
             </div>

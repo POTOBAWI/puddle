@@ -1,95 +1,146 @@
+{% load i18n %}
 <!doctype html>
-<html lang="fr">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock %} | Okaz</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  {% load static %}
 </head>
-<body class="flex flex-col min-h-screen">
+
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
 
   <!-- NAVBAR -->
-  <nav class="py-4 px-6 flex justify-between items-center border-b border-gray-300 bg-white shadow">
-    <!-- Logo -->
-    <a href="/" class="text-2xl font-bold text-teal-600">Okaz</a>
+  <nav class="bg-white border-b border-gray-300 shadow-sm">
+    <div class="px-6 py-4 flex justify-between items-center">
 
-    <!-- Menu hamburger (mobile) -->
-    <button id="menu-btn" class="md:hidden text-2xl text-gray-600">
-      <i class="fas fa-bars"></i>
-    </button>
+      <!-- Logo -->
+      <a href="/" class="text-2xl font-bold text-teal-600">
+        {% trans "Okaz" %}
+      </a>
 
-    <!-- Liens de navigation -->
-    <div id="menu" class="hidden flex-col space-y-2 md:flex md:flex-row md:space-y-0 md:space-x-6 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent z-50 px-6 md:px-0 py-4 md:py-0 shadow md:shadow-none">
-      <a href="{% url 'item:newItem' %}" class="block w-full text-left text-lg bg-teal-400 text-white p-2 rounded-xl font-medium hover:bg-teal-600">
-        <i class="fas fa-plus-circle mr-2"></i> Nouveau produit
-      </a>
-      <a href="{% url 'item:items' %}" class="block w-full text-left text-lg bg-gray-500 text-white p-2 rounded-xl font-medium hover:bg-teal-600">
-        <i class="fas fa-search mr-2"></i> Rechercher
-      </a>
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'conversation:inbox' %}" class="block w-full text-left text-lg bg-teal-400 text-white p-2 rounded-xl font-medium hover:bg-teal-600">
-          <i class="fas fa-envelope mr-2"></i> Inbox
+      <!-- Menu mobile -->
+      <button id="menu-btn" class="md:hidden text-2xl text-gray-600">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Liens -->
+      <div id="menu"
+           class="hidden md:flex md:items-center md:space-x-3
+                  absolute md:static top-full left-0 w-full md:w-auto
+                  bg-white md:bg-transparent px-6 md:px-0 py-4 md:py-0
+                  shadow md:shadow-none space-y-2 md:space-y-0">
+
+        <a href="{% url 'item:newItem' %}"
+           class="px-4 py-2 rounded-xl bg-emerald-500 text-white font-medium hover:bg-emerald-600">
+          <i class="fas fa-plus-circle mr-1"></i> {% trans "Nouveau produit" %}
         </a>
-        <a href="{% url 'dashboard:index' %}" class="block w-full text-left text-lg bg-gray-500 text-white p-2 rounded-xl font-medium hover:bg-teal-600">
-          <i class="fas fa-chart-line mr-2"></i> Dashboard
+
+        <a href="{% url 'item:items' %}"
+           class="px-4 py-2 rounded-xl bg-indigo-500 text-white font-medium hover:bg-indigo-600">
+          <i class="fas fa-search mr-1"></i> {% trans "Rechercher" %}
         </a>
-      {% endif %}
+
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'conversation:inbox' %}"
+             class="px-4 py-2 rounded-xl bg-teal-500 text-white font-medium hover:bg-teal-600">
+            <i class="fas fa-envelope mr-1"></i> {% trans "Inbox" %}
+          </a>
+
+          <a href="{% url 'dashboard:index' %}"
+             class="px-4 py-2 rounded-xl bg-gray-600 text-white font-medium hover:bg-gray-700">
+            <i class="fas fa-chart-line mr-1"></i> {% trans "Dashboard" %}
+          </a>
+
+          <a href="{% url 'core:changer_langue' %}"
+             class="px-4 py-2 rounded-xl bg-gray-500 text-white font-medium hover:bg-gray-600">
+            <i class="fas fa-language mr-1"></i> {% trans "changer la langue" %}
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Auth desktop -->
+      <div class="hidden md:flex items-center space-x-2">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'logout' %}"
+             class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600">
+            <i class="fas fa-sign-out-alt mr-1"></i> {% trans "Déconnexion" %}
+          </a>
+        {% else %}
+          <a href="{% url 'core:signup' %}"
+             class="px-4 py-2 bg-teal-500 text-white rounded-xl hover:bg-teal-600">
+            <i class="fas fa-user-plus mr-1"></i> {% trans "S'inscrire" %}
+          </a>
+          <a href="{% url 'core:login' %}"
+             class="px-4 py-2 bg-gray-500 text-white rounded-xl hover:bg-gray-600">
+            <i class="fas fa-sign-in-alt mr-1"></i> {% trans "Connexion" %}
+          </a>
+        {% endif %}
+      </div>
     </div>
 
-    <!-- Boutons auth (toujours visibles sur desktop) -->
-    <div class="hidden md:flex items-center space-x-4">
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'logout' %}" class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-xl">
-          <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
-        </a>
-      {% else %}
-        <a href="{% url 'core:signup' %}" class="px-4 py-2 bg-teal-500 hover:bg-teal-700 text-white rounded-xl">
-          <i class="fas fa-user-plus mr-2"></i> S'inscrire
-        </a>
-        <a href="{% url 'core:login' %}" class="px-4 py-2 bg-gray-500 hover:bg-teal-700 text-white rounded-xl">
-          <i class="fas fa-sign-in-alt mr-2"></i> Connexion
-        </a>
-      {% endif %}
+    <!-- Formulaire langue -->
+    <div class="px-6 pb-4">
+      <form action="{% url 'set_language' %}" method="post" class="flex items-center gap-2">
+        {% csrf_token %}
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        <select name="language" class="px-3 py-1 border rounded-md">
+          {% for lang in LANGUAGES %}
+            <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+              {{ lang.1 }}
+            </option>
+          {% endfor %}
+        </select>
+        <button type="submit" class="px-3 py-1 bg-gray-200 rounded-md hover:bg-gray-300">
+          {% trans "Changer de langue" %}
+        </button>
+      </form>
     </div>
   </nav>
 
-  <!-- Boutons auth pour mobile (sous la navbar) -->
-  <div class="md:hidden px-6 py-4 space-y-2 bg-white shadow">
+  <!-- Boutons auth mobile -->
+  <div class="md:hidden px-6 py-4 space-y-2 bg-white border-t">
+    <a href="{% url 'conversation:resumer' %}" class="block text-center px-4 py-2 bg-blue-500 text-white rounded-xl">
+      resumer
+    </a>
+
     {% if request.user.is_authenticated %}
-      <a href="{% url 'logout' %}" class="block text-center px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-xl">
-        <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
+      <a href="{% url 'logout' %}" class="block text-center px-4 py-2 bg-red-500 text-white rounded-xl">
+        {% trans "Déconnexion" %}
       </a>
     {% else %}
-      <a href="{% url 'core:signup' %}" class="block text-center px-4 py-2 bg-teal-500 hover:bg-teal-700 text-white rounded-xl">
-        <i class="fas fa-user-plus mr-2"></i> S'inscrire
+      <a href="{% url 'core:signup' %}" class="block text-center px-4 py-2 bg-teal-500 text-white rounded-xl">
+        {% trans "S'inscrire" %}
       </a>
-      <a href="{% url 'core:login' %}" class="block text-center px-4 py-2 bg-gray-500 hover:bg-teal-700 text-white rounded-xl">
-        <i class="fas fa-sign-in-alt mr-2"></i> Connexion
+      <a href="{% url 'core:login' %}" class="block text-center px-4 py-2 bg-gray-500 text-white rounded-xl">
+        {% trans "Connexion" %}
       </a>
     {% endif %}
   </div>
 
   <!-- CONTENU -->
   <main class="flex-grow py-6 px-6">
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
   </main>
 
   <!-- FOOTER -->
-  <footer class="py-6 px-6 bg-gray-800 text-gray-300">
-    <p>&copy; 2024 ChezToi. Tous droits réservés.</p>
+  <footer class="bg-gray-800 text-gray-300 py-6 px-6">
+    <p class="text-center text-sm">
+      &copy; 2024 {% trans "Okaz. Tous droits réservés." %}
+    </p>
   </footer>
 
-  <!-- SCRIPT pour le menu mobile -->
+  <!-- Script menu -->
   <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
-
     menuBtn.addEventListener('click', () => {
       menu.classList.toggle('hidden');
     });
   </script>
+
 </body>
 </html>

@@ -2,8 +2,8 @@
 {% block title %}Log In{% endblock %}
 
 {% block content %}
-<div class="w-full max-w-md my-6 mx-auto bg-gray-100 rounded px-6 py-6">
-    <h1 class="text-3xl font-semibold mb-6 text-center">Log In</h1>
+<div class="w-full max-w-md my-6 mx-auto bg-gray-500 rounded px-6 py-6 shadow-lg">
+    <h1 class="text-3xl font-semibold mb-6 text-center text-teal-700">Log In</h1>
     <form action="" method="post">
         {% csrf_token %}
 
@@ -36,5 +36,6 @@
         <!-- Submit Button -->
         <button class="w-full py-4 px-8 text-lg bg-teal-500 hover:bg-teal-700 rounded-xl text-white mt-3">Submit</button>
     </form>
+    <p class="mt-4 text-center text-gray-600">Don't have an account? <a href="{% url 'core:signup' %}" class="text-teal-500 hover:underline">Sign Up</a></p>
 </div>
 {% endblock %}

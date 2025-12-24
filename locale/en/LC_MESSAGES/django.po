@@ -1,0 +1,146 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-28 16:00+0000\n"
+"PO-Revision-Date: 2025-08-28 16:00+0000\n"
+"Last-Translator: YOUR NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\item\models.py:6
+msgid "Nom de la catégorie"
+msgstr "Category Name"
+
+#: .\item\models.py:10 .\item\models.py:17
+msgid "Catégorie"
+msgstr "Category"
+
+#: .\item\models.py:11
+msgid "Catégories"
+msgstr "Categories"
+
+#: .\item\models.py:18
+msgid "Nom"
+msgstr "Name"
+
+#: .\item\models.py:19
+msgid "Description"
+msgstr "Description"
+
+#: .\item\models.py:20
+msgid "Prix"
+msgstr "Price"
+
+#: .\item\models.py:21
+msgid "Image"
+msgstr "Image"
+
+#: .\item\models.py:22
+msgid "Vendu"
+msgstr "Sold"
+
+#: .\item\models.py:23 .\item\models.py:35
+msgid "Utilisateur"
+msgstr "User"
+
+#: .\item\models.py:24
+msgid "Créé le"
+msgstr "Created on"
+
+#: .\item\models.py:28 .\item\models.py:36
+msgid "Article"
+msgstr "Item"
+
+#: .\item\models.py:29
+msgid "Articles"
+msgstr "Items"
+
+#: .\item\models.py:37
+msgid "Vu le"
+msgstr "Seen on"
+
+#: .\puddle\settings.py:168
+msgid "Français"
+msgstr "French"
+
+#: .\puddle\settings.py:169
+msgid "Anglais"
+msgstr "English"
+
+#: .\puddle\settings.py:170
+msgid "Espagnol"
+msgstr "Spanish"
+
+#: .\puddle\settings.py:171
+msgid "Allemand"
+msgstr "German"
+
+#:.\item\templates\item\detail.html:18
+msgid "Noter ce vendeur"
+msgstr "Rate that seller"
+
+#: templates/base.html:…
+msgid "Connexion"
+msgstr "Login"
+
+msgid "Déconnexion"
+msgstr "Logout"
+
+msgid "S'inscrire"
+msgstr "Sign up"
+
+msgid "Nouveau produit"
+msgstr "New Item"
+
+msgid "Rechercher"
+msgstr "Search"
+
+msgid "Changer de langue"
+msgstr "Change language"
+
+msgid "Okaz"
+msgstr "Okaz"
+
+msgid "Inbox"
+msgstr "Inbox"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Lieu:"
+msgstr "Location:"
+
+msgid "Note moyenne du vendeur:"
+msgstr "Seller's average rating:"
+
+msgid "Modifier:"
+msgstr "Update:"
+
+msgid "Supprimer:"
+msgstr "Delete:"
+
+msgid "Ceci est votre article:"
+msgstr "That is your own article:"
+
+msgid "Articles similaires:"
+msgstr "Similar articles:"
+
+msgid "Contacter le vendeur:"
+msgstr "Contact seller:"
+
+msgid "Ajouter au panier:"
+msgstr "Add to cart:"
+
+msgid "Vendeur:"
+msgstr "Seller:"
+

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
+from .models import SellerRating
 
 
 
@@ -39,3 +40,18 @@ class SignupForm(UserCreationForm):
             'class': 'w-full py-4 px-6 rounded-xl',
             'placeholder': 'Repeat your password'
         })
+
+from .models import Profile
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['langue']
+
+
+
+
+
+class SellerRatingForm(forms.ModelForm):
+    class Meta:
+        model = SellerRating
+        fields = ['note', 'commentaire']

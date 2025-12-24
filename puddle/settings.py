@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 
+from django.utils.translation import gettext_lazy as _
+from django.contrib.messages import constants as messages
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-5q)#-9v7bg3trz4oml^&poqbtmwx35k#rsl^_n%inqz*7a4ay!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+#ALLOWED_HOSTS = ['.onrender.com']
 
 LOGIN_URL="/login/"
 LOGIN_REDIRECT_URL="/"
@@ -35,6 +38,14 @@ import os
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+
+MESSAGES_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',
+}
 
 
 # Application definition
@@ -53,13 +64,16 @@ INSTALLED_APPS = [
     'dashboard',
     'conversation',
     'cart',
-    'order'
+    'order',
+   
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',#pour local
     'django.middleware.common.CommonMiddleware',
+    
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -121,13 +135,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = True # pour la tradcution
 
 USE_TZ = True
+
+USE_L10N=True# pour la localisation
 
 
 # Static files (CSS, JavaScript, Images)
@@ -154,4 +170,21 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #language settings
+
+
+
+
+
+LANGUAGES = [
+    ('fr', _('Français')),
+    ('en', _('Anglais')),
+    ('es', _('Espagnol')),
+    ('de', _('Allemand')),
+]
+
+
+# Où Django stockera les fichiers de traduction .po/.mo
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 

@@ -1,0 +1,10 @@
+<form method="post">
+  {% csrf_token %}
+  <textarea name="text" rows="6" cols="60"></textarea>
+  <button type="submit">Résumé</button>
+</form>
+
+{% if summary %}
+<h3>Résumé :</h3>
+<p>{{ summary }}</p>
+{% endif %}

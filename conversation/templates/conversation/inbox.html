@@ -26,7 +26,7 @@
                         <span class="text-gray-500 text-sm ml-2">{{ conversation.modified_at|date:"d/m/Y H:i" }}</span>
                         {% if conversation.unread_count > 0 %}
                             <span class="ml-2 inline-block bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
-                                {{ conversation.unread_count }} message {{ conversation.unread_count|pluralize }} non lu {{ conversation.unread_count|pluralize:"s" }}
+                                {{ conversation.unread_count }} message{{ conversation.unread_count|pluralize }} non lu{{ conversation.unread_count|pluralize:"s" }}
                             </span>
                         {% endif %}
                     </p>

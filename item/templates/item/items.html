@@ -2,9 +2,9 @@
 {% block title %}Items{% endblock title %}
 
 {% block content %}
-<div class="pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-gray-100">
+<div class="pb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-gray-500 rounded-xl shadow-lg ">
     <!-- Sidebar -->
-    <div class="col-span-1 sm:col-span-2 lg:col-span-1">
+    <div class="col-span-1 sm:col-span-2 lg:col-span-1 ml-4 mt-4 bg-gray-800 rounded-xl shadow-lg p-6">
         <form action="{% url 'item:items' %}" method="get" class="mb-4">
             <input name="query" class="w-full py-3 px-4 border rounded-xl" type="text" value="{{ query }}" placeholder="Find a product...">
             <button class="mt-2 py-3 px-8 text-lg bg-teal-500 text-white rounded-xl w-full sm:w-auto">Search</button>
@@ -12,18 +12,18 @@
 
         <hr class="my-6">
 
-        <p class="font-semibold mb-2">Categories</p>
+        <p class="font-semibold mb-2 text-white">Categories</p>
         <ul class="space-y-2">
             {% for category in categories %}
             <li class="py-2 px-2 rounded-xl {% if category.id == category.id %} bg-gray-200 {% endif %}">
-                <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}" class="block">{% if category.id == category.id %} <strong> {% endif %}{{ category.name }}{% if category.id == category.id %} </strong>{% endif %}</a>
+                <a href="{% url 'item:category_items' category.id %}">{{ category.name }}</a>
             </li>
             {% endfor %}
         </ul>
 
         <hr class="my-6">
 
-        <p class="font-semibold mb-2">Clear filters</p>
+        <p class="font-semibold mb-2 text-white">Clear filters</p>
         <ul>
             <li><a href="{% url 'item:items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white w-full sm:w-auto">Clear</a></li>
         </ul>
@@ -33,15 +33,25 @@
     <div class="col-span-1 sm:col-span-2 lg:col-span-3">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
             {% for item in items %}
-                <div class="flex flex-col">
+                <div class="flex flex-col mt-4 mr-4 mb-4 bg-white rounded-xl shadow-lg">
                     <a href="{% url 'item:detail' item.id %}">
                         <div class="overflow-hidden rounded-t-xl">
-                            
+                            {% if item.image.url %}
                             <img src="{{ item.image.url }}" alt="image" class="w-full h-48 object-cover">
+                            {% else %}
+
+                           
+                                <p class="text-gray-500">No image available</p>
+                            {% endif %}
                         </div>
                         <div class="p-6 bg-white rounded-b-xl">
+
                             <h2 class="text-xl font-semibold">{{ item.name }}</h2>
-                            <p class="text-gray-500">Price: {{ item.price }}</p>
+                            
+                           <p >Lieu:<span class="text-gray-500">{{ item.location }}</span></p>
+                           <p >Prix:<span class="text-gray-500">{{ item.price}} fcfa</span></p>
+
+                            
                         </div>
                     </a>
                 </div>
